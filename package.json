@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^6.9.1",
+    "nodemon": "^2.0.20",
+    "router-dom": "^2.2.10"
+  },
+  "name": "ubicatec",
+  "version": "1.0.0",
+  "description": "api rest para la aplicacion ",
+  "main": "index.js",
+  "scripts": {
+    "test": "express, mongoose, nodemon, router-dom, cors",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "class.express.commond"
+  ],
+  "author": "Samantha Arias Zamudio",
+  "license": "ISC"
+}
