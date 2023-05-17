@@ -1,7 +1,8 @@
-const mongoose=require("mongoose");
+//const mongoose=require("mongoose");
+import mongoose, {Schema } from "mongoose";
 
 
-const Depto=mongoose.Schema({
+const Depto= new Schema({
 
     name_depto: String,
     edificio: String,
@@ -10,9 +11,13 @@ const Depto=mongoose.Schema({
         type:String,
         unique:true
     },
+    persona:{
+        type:Schema.Types.ObjectId,ref:"Persona"
+    },
     created_at:{
         type:Date,
         default:Date.now}
 })
 
-module.exports=mongoose.model("departamentos", Depto);
+const Deptos=mongoose.model('deptos',Depto);
+export default Deptos;
