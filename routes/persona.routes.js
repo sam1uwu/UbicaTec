@@ -5,9 +5,9 @@ const router=routerx();
 
 router.post("/guardarPersona",personaController.crearDepto);
 router.get("/consultarPersona",personaController.consultarDepartamentos);
-//router.get("/buscarOnePersona/:id",personaController.buscarOnePersona);
+router.get("/buscarOnePersona/:id",personaController.buscarOnePersona);
 router.delete("/eliminarPersona/:id",personaController.deleteDepto);
-//api.patch("/actualizarPersona/:id",personaController.updatePersonas);
+router.patch("/actualizarPersona/:id",personaController.updatePersonas);
 
 
 export default router;

@@ -41,8 +41,32 @@ export default{
             res.status(200).send({msg: "departamento eliminado"})
         }
     })
-}
+},
 
+    buscarOnePersona: (req,res)=>{
+    const {id}=req.params;
+    Personas.findById(id, (error, personaStored)=>{
+        if (error){
+            res.status(400).send({msg: "No se encuetra el dato"})
+
+        }else{
+            res.status(200).send({msg: personaStored})
+        }
+    })
+},
+
+    updatePersonas(req,res){
+    const {id}=req.params;
+    const datosPersona=req.body;
+ 
+    Personas.findByIdAndUpdate({_id:id},datosPersona, (error)=>{
+     if(error){
+         res.status(400).send({msg: "Datos no actualizados"})
+     }else{
+         res.status(200).send({msg: "Los datos fueron actualizados correctamente"})
+     }
+    })
+ },
 
 
 }
