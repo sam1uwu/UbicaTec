@@ -1,25 +1,39 @@
-//const mongoose=require("mongoose");
+//const express=requiere("express");
+import express from "express";
+//const cors=requiere("express");
+import cors from "express";
+//const mongoose=requiere("mongoose");
 import mongoose from "mongoose";
-const {
-    DB_NAME,
-    API_VERSION,
-    DB_PORT,
-    IP_SERVER,
-}=require("./constants");
-
-const app=require("./app");
-
-const port =process.env.PORT || 4000;
-
-mongoose.set("strictQuery",false);
-mongoose.connect(`mongodb://${IP_SERVER}:${DB_PORT}/${DB_NAME}`, (error)=>{
-    if(error) throw error;
-})
+import path from "path";
 
 
-app.listen(port, ()=>{
-    console.log("API REST  DE LA APP FUNCIONANDO /(u.u)/");
-    console.log("---------------------------------------");
-    console.log(`http://${IP_SERVER}:${port}/api/${API_VERSION}`);
-})
+//importacion de las rutas
+import router from "./routes";
 
+//iniciar conexion a la base de datos
+mongoose.Promise=global.Promise;        //para obtener todas las caracteristicas de mongo
+const dbUrl=("mongodb://127.0.0.1:27017/UBICATEC-MASTER")
+mongoose.set('strictQuery', false);
+mongoose.connect(dbUrl,{useNewUrlParser:true,useUnifiedTopology:true})
+.then(mongoose=>console.log('Conectando a la BD en el puerto 27017'))
+.catch(err=>console.log(err));
+
+//inicia express
+const app=express();
+
+app.set('port', process.env.Port || 4000);
+
+app.use(cors()); //para no tener problema con los navegadores
+
+app.use(express.json());//para leer paquetes json
+app.use(express.urlencoded({extended:true}));//para no encriptar datos
+app.use(express.static(path.join(__dirname,'public')));//para espicibicar que tendremos una carpeta tipo publico donde guardaremos cosas
+
+app.use("/api",router);
+
+//escuchar el puerto
+app.listen(app.get('port'),()=>{
+    console.log("")
+    console.log(";-;-------------------(UwU)------------------;-;")
+    console.log("Servidor ejecutandose en el puerto " + app.get('port'))
+});

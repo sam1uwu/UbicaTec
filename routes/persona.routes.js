@@ -1,13 +1,13 @@
-const express=require("express");
-const personaController= require("../controller/persona.controller");
+import routerx from "express-promise-router";
+import personaController from "../controller/depto.controller";
 
-const api=express.Router();
+const router=routerx();
 
-api.post("/guardarPersona",personaController.createPersonas);
-api.get("/consultarPersona",personaController.getPersonas);
-api.get("/buscarOnePersona/:id",personaController.buscarOnePersona);
-api.delete("/eliminarPersona/:id",personaController.deletePersonas);
-api.patch("/actualizarPersona/:id",personaController.updatePersonas);
+router.post("/guardarPersona",personaController.crearDepto);
+router.get("/consultarPersona",personaController.consultarDepartamentos);
+//router.get("/buscarOnePersona/:id",personaController.buscarOnePersona);
+router.delete("/eliminarPersona/:id",personaController.deleteDepto);
+//api.patch("/actualizarPersona/:id",personaController.updatePersonas);
 
 
-module.exports=api;
+export default router;

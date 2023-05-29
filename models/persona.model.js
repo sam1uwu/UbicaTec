@@ -1,6 +1,7 @@
-const mongoose=require("mongoose");
+import {model,Schema} from "mongoose";
 
-const Personas=mongoose.Schema({
+const Personas=new Schema({
+
     matricula:{
         type:String,
         unique:true
@@ -18,4 +19,4 @@ const Personas=mongoose.Schema({
         default:Date.now}
 })
 
-module.exports=mongoose.model("Persona", Personas);
+export default model("Personas",Personas);
