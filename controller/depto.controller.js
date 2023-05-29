@@ -44,6 +44,29 @@ export default{
     })
 },
 
+    buscarOneDepto(req,res){
+    const {id}=req.params;
+    Depto.findById(id, (error, deptoStored)=>{
+        if (error){
+            res.status(400).send({msg: "No se encuetra el dato"})
 
+        }else{
+            res.status(200).send({msg: deptoStored})
+        }
+    })
 
+    },
+
+    updateDepto(req,res){
+        const {id}=req.params;
+        const datosDepto=req.body;
+     
+        Depto.findByIdAndUpdate({_id:id},datosDepto, (error)=>{
+         if(error){
+             res.status(400).send({msg: "Datos no actualizados"})
+         }else{
+             res.status(200).send({msg: "Los datos fueron actualizados correctamente"})
+         }
+        })
+     }
 }
