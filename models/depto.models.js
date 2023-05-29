@@ -1,8 +1,8 @@
 //const mongoose=require("mongoose");
-import mongoose, {Schema } from "mongoose";
+import {model,Schema} from "mongoose"
 
 
-const Depto= new Schema({
+const depto= new Schema({
 
     name_depto: String,
     edificio: String,
@@ -19,5 +19,4 @@ const Depto= new Schema({
         default:Date.now}
 })
 
-const Deptos=mongoose.model('deptos',Depto);
-export default Deptos;
+export default model("depto",depto);;

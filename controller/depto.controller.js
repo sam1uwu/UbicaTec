@@ -1,28 +1,38 @@
-const Depto=require("../models/depto.models");
+import models from "../models";
 
-function createDepto(req,res){
-    const depto=new Depto(req.body);
-   
-    depto.save((error, deptoStored)=>{
-        if(error){
-            res.status(400).send({msg: "Error al guardar los datos"})
-        }else{
-            res.status(200).send(deptoStored)
+
+export default{
+    crearDepto: async (req,res,next)=>{      //asyn = asincrono
+        try {
+                const depto=new models.Depto(req.body) //para usar todo los campos
+        
+                const guardarDepto=await depto.save();        //usar siempre await para asyn y crear tiempos de espera
+                res.status(200).json(guardarDepto);
+                console.log(req.body);
+        } catch (error) {
+            res.status(500).send({
+                msg:"Ocurrido un error al guardar"
+            });
+            next(error);
+    }
+    },
+
+    consultarDepartamentos: async(req,res,next)=>{
+        try {
+            
+            const consultar= await models.Departamentos.find(); //para consultar empleados
+            res.json(consultar);
+
+        } catch (error) {
+            res.status(500).send({
+                msg:"Ocurrido un error al guardar"
+            });
+            next(error);
+            
         }
-    })
-}
+    },
 
-function getDepto(req,res){
-    Depto.find((error, deptoStored)=>{
-        if(error){
-            res.status(500).send({msg:"No hay datos que consultar"})
-        }else{
-            res.status(200).send(deptoStored)
-        }
-    })
-}
-
-function deleteDepto(req,res){
+    deleteDepto: async(req,res)=>{
     const {id}=req.params;
 
     Depto.findByIdAndDelete(id, (error)=>{
@@ -32,38 +42,8 @@ function deleteDepto(req,res){
             res.status(200).send({msg: "departamento eliminado"})
         }
     })
-}
+},
 
-function updateDepto(req,res){
-   const {id}=req.params;
-   const datosDepto=req.body;
 
-   Depto.findByIdAndUpdate({_id:id},datosDepto, (error)=>{
-    if(error){
-        res.status(400).send({msg: "Datos no actualizados"})
-    }else{
-        res.status(200).send({msg: "Los datos fueron actualizados correctamente"})
-    }
-   })
-}
-//copiado en documentacion de express
-function buscarOneDepto(req,res){
-    const {id}=req.params;
-    Depto.findById(id, (error, deptoStored)=>{
-        if (error){
-            res.status(400).send({msg: "No se encuetra el dato"})
 
-        }else{
-            res.status(200).send({msg: deptoStored})
-        }
-    })
-
-}
-
-module.exports={
-    createDepto,
-    getDepto,
-    deleteDepto,
-    updateDepto,
-    buscarOneDepto
 }

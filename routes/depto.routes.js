@@ -1,12 +1,12 @@
-const express=require("express");
-const deptoController= require("../controller/depto.controller");
+import routerx from "express-promise-router";
+import deptoController from "../controller/depto.controller";
 
-const api=express.Router();
+const router=routerx();
 
-api.post("/depto",deptoController.createDepto);
-api.get("/deptos",deptoController.getDepto);
-api.get("/deptos/:id",deptoController.buscarOneDepto);
-api.delete("/depto/:id",deptoController.deleteDepto);
-api.patch("/depto/:id",deptoController.updateDepto);
+router.post("/crearDepto",deptoController.crearDepto);
+router.get("/consultarDepartamentos",deptoController.consultarDepartamentos);
+//api.get("/deptos/:id",deptoController.buscarOneDepto);
+router.delete("/eliminarDepto/:id",deptoController.deleteDepto);
+//api.patch("/depto/:id",deptoController.updateDepto);
 
-module.exports=api;
+export default router;
