@@ -5,8 +5,8 @@ const router=routerx();
 
 router.post("/crearDepto",deptoController.crearDepto);
 router.get("/consultarDepartamentos",deptoController.consultarDepartamentos);
-//api.get("/deptos/:id",deptoController.buscarOneDepto);
+router.get("/deptos/:id",deptoController.buscarOneDepto);
 router.delete("/eliminarDepto/:id",deptoController.deleteDepto);
-//api.patch("/depto/:id",deptoController.updateDepto);
+router.patch("/depto/:id",deptoController.updateDepto);
 
 export default router;
